@@ -1,0 +1,206 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    style="
+      --background: #0b0713;
+      border-bottom: 1px solid rgba(190, 46, 221, 0.3);
+    "
+  >
+    <ion-title style="color: #00d2ff; font-weight: 700"
+      >&lt;Lavender.Admin/&gt;</ion-title
+    >
+    <ion-buttons slot="end">
+      <ion-button
+        routerLink="/home"
+        fill="solid"
+        color="purple"
+        style="font-weight: 700; margin-right: 8px; --border-radius: 8px"
+      >
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon> EXIT
+        CONSOLE
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  style="--background: #0b0713; --color: #ffffff"
+  class="ion-padding"
+>
+  <div style="max-width: 1200px; margin: 0 auto">
+    <div style="margin: 15px 0">
+      <h2 style="color: #ffffff; font-weight: 700">
+        System <span style="color: #00d2ff">Control Hub</span>
+      </h2>
+    </div>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="12" size-md="4">
+          <ion-card
+            style="
+              --background: #150f22;
+              border-radius: 15px;
+              border: 1px solid rgba(190, 46, 221, 0.2);
+              margin: 5px;
+            "
+          >
+            <ion-card-content style="position: relative">
+              <span style="color: #a0a0a0; font-size: 0.8rem; font-weight: bold"
+                >PLATFORM SALES</span
+              >
+              <h1 style="color: #ffffff; font-weight: 700; margin: 5px 0 0 0">
+                {{ totalPlatformSales }} &euro;
+              </h1>
+              <ion-icon
+                name="cash-outline"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 15px;
+                  color: #22c55e;
+                  font-size: 1.5rem;
+                "
+              ></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="4">
+          <ion-card
+            style="
+              --background: #150f22;
+              border-radius: 15px;
+              border: 1px solid rgba(190, 46, 221, 0.2);
+              margin: 5px;
+            "
+          >
+            <ion-card-content style="position: relative">
+              <span style="color: #a0a0a0; font-size: 0.8rem; font-weight: bold"
+                >AUTHORIZED VENDORS</span
+              >
+              <h1 style="color: #ffffff; font-weight: 700; margin: 5px 0 0 0">
+                {{ activeVendorsCount }} Active
+              </h1>
+              <ion-icon
+                name="people-outline"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 15px;
+                  color: #00d2ff;
+                  font-size: 1.5rem;
+                "
+              ></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="4">
+          <ion-card
+            style="
+              --background: #150f22;
+              border-radius: 15px;
+              border: 1px solid rgba(190, 46, 221, 0.2);
+              margin: 5px;
+            "
+          >
+            <ion-card-content style="position: relative">
+              <span style="color: #a0a0a0; font-size: 0.8rem; font-weight: bold"
+                >COMMISSION RATE</span
+              >
+              <h1 style="color: #ffffff; font-weight: 700; margin: 5px 0 0 0">
+                {{ commissionRate }}%
+              </h1>
+              <ion-icon
+                name="shield-checkmark-outline"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 15px;
+                  color: #f59e0b;
+                  font-size: 1.5rem;
+                "
+              ></ion-icon>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <h3 style="color: #ffffff; margin-top: 25px; font-weight: bold">
+      Device Approval Queue
+    </h3>
+
+    <div
+      *ngIf="pendingProducts.length === 0"
+      style="
+        background: #150f22;
+        border: 1px dashed rgba(190, 46, 221, 0.3);
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        color: #a0a0a0;
+      "
+    >
+      🎉 Queue clear! No pending hardware nodes require clearance.
+    </div>
+
+    <ion-card
+      *ngFor="let prod of pendingProducts"
+      style="
+        --background: #150f22;
+        border-radius: 15px;
+        margin: 10px 0;
+        border: 1px solid rgba(190, 46, 221, 0.2);
+      "
+    >
+      <ion-card-content
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+        "
+      >
+        <div style="display: flex; align-items: center; gap: 12px">
+          <img
+            [src]="prod.icon"
+            style="
+              width: 50px;
+              height: 50px;
+              object-fit: cover;
+              border-radius: 8px;
+            "
+          />
+          <div>
+            <h4 style="color: #ffffff; margin: 0; font-weight: bold">
+              {{ prod.name }} -
+              <span style="color: #00d2ff">{{ prod.price }} &euro;</span>
+            </h4>
+            <p style="color: #a0a0a0; margin: 2px 0 0 0; font-size: 0.8rem">
+              Vendor: {{ prod.vendorName }} | Tel: {{ prod.vendorPhone }}
+            </p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 5px">
+          <ion-button
+            color="success"
+            fill="clear"
+            (click)="approveVendor(prod)"
+            style="font-size: 1.3rem"
+          >
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button
+            color="danger"
+            fill="clear"
+            (click)="rejectVendor(prod)"
+            style="font-size: 1.3rem"
+          >
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

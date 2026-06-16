@@ -1,0 +1,181 @@
+:root {
+  --bg-dark: #0f172a;
+  --card-bg: #1e293b;
+  --lavender-bright: #bf55ec;
+  --cyan-accent: #00d2ff;
+}
+
+.bg-cart-panel {
+  --background: var(--bg-dark);
+}
+
+.cart-heading {
+  margin: 20px 10px;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f8fafc;
+    span {
+      color: var(--lavender-bright);
+    }
+  }
+  p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+}
+
+// واجهة السلة الفارغة
+.empty-cart-state {
+  text-align: center;
+  padding: 60px 20px;
+  .empty-icon {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 15px;
+  }
+  h3 {
+    color: #f8fafc;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+  p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+}
+
+// تصميم كرت العنصر داخل السلة
+.cart-item-card {
+  --background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  margin: 12px 0;
+
+  .item-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+.item-main-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .cart-device-icon {
+    font-size: 2.8rem;
+  }
+
+  .text-meta {
+    h4 {
+      color: #f8fafc;
+      font-weight: 600;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .v-tag {
+      color: var(--cyan-accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin: 2px 0;
+    }
+    .unit-price {
+      color: #94a3b8;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// التحكم بالكمية والأزرار
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 4px;
+
+    .q-btn {
+      background: transparent;
+      border: none;
+      color: var(--lavender-bright);
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 6px;
+      }
+    }
+
+    .q-number {
+      color: #f8fafc;
+      font-weight: 600;
+      padding: 0 12px;
+      font-size: 1rem;
+    }
+  }
+
+  .trash-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      color: #ef4444;
+    }
+  }
+}
+
+// كرت الفاتورة والدفع
+.summary-card {
+  --background: #131b2e;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin-top: 25px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #f8fafc;
+    .total-amount {
+      color: var(--cyan-accent);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+  }
+
+  .shipping-note {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-top: 6px;
+  }
+  .btn-checkout {
+    font-weight: 600;
+    --border-radius: 50px;
+  }
+}

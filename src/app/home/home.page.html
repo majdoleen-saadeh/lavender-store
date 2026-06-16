@@ -1,0 +1,181 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="--background: #0b0713; --border-color: rgba(190, 46, 221, 0.3);">
+    <ion-title style="color: #be2edd; font-weight: 700; letter-spacing: 0.5px;">&lt;Lavender.Store/&gt;</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home" style="--color: #be2edd;">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+      
+      <ion-button routerLink="/wishlist" style="--color: #ff4757;">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/cart" style="--color: #ffffff;">
+        <ion-icon name="cart-outline"></ion-icon>
+        <ion-badge color="danger" style="border-radius: 20px;">{{ cartCount }}</ion-badge>
+      </ion-button>
+      
+      <ion-button routerLink="/vendor-dashboard" style="--color: #ffffff;">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+      
+      <ion-button routerLink="/admin-dashboard" style="--color: #ffffff;">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="--background: #0b0713; --color: #ffffff;" class="ion-padding">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 10px; overflow: hidden;">
+    
+    <div class="ads-marquee-container" style="margin-bottom: 25px;">
+      <div class="ads-track-animated">
+        
+        <div class="ad-banner-card card-one">
+          <span class="ad-badge">🔥 Featured</span>
+          <div class="ad-body">
+            <h2>Lavender Ecosystem Sale</h2>
+            <p>Up to 30% off on verified context hardware nodes and automated systems.</p>
+          </div>
+        </div>
+
+        <div class="ad-banner-card card-two">
+          <span class="ad-badge">⚡ New Tech</span>
+          <div class="ad-body">
+            <h2>Next-Gen Smart Nodes</h2>
+            <p>Explore high-performance sensors with offline automation capabilities.</p>
+          </div>
+        </div>
+
+        <div class="ad-banner-card card-three">
+          <span class="ad-badge">💎 Exclusive</span>
+          <div class="ad-body">
+            <h2>Premium Developer Bundles</h2>
+            <p>Get full access to certified hardware toolkits and customized templates.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <ion-card style="--background: #150f22; border-radius: 15px; border: 1px solid rgba(190, 46, 221, 0.2); margin: 0 0 25px 0;">
+      <ion-card-content style="padding: 20px;">
+        <h4 style="font-size: 1.05rem; font-weight: 600; color: #ffffff; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;">
+          <ion-icon name="stats-chart-outline" style="color: #f59e0b;"></ion-icon> 
+          Store Daily Active Threshold
+        </h4>
+        <div style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; height: 22px; overflow: hidden; border: 1px solid rgba(190, 46, 221, 0.15);">
+          <div class="progress-fill-glow" [style.width.%]="salesProgress" style="background: linear-gradient(90deg, #be2edd, #00d2ff); height: 100%; text-align: center; color: white; font-size: 0.75rem; line-height: 22px; font-weight: bold; box-shadow: 0 0 15px rgba(190, 46, 221, 0.5);">
+            {{ salesProgress }}% Completed
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 20px; scrollbar-width: none;">
+      <button
+        *ngFor="let cat of categories"
+        (click)="filterProducts(cat)"
+        [style.background]="selectedCategory === cat ? '#be2edd' : '#150f22'"
+        [style.color]="selectedCategory === cat ? '#ffffff' : '#a0a0a0'"
+        [style.border-color]="selectedCategory === cat ? '#be2edd' : 'rgba(190, 46, 221, 0.2)'"
+        style="border: 1px solid; padding: 10px 24px; border-radius: 12px; font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: all 0.25s ease;"
+      >
+        {{ cat }}
+      </button>
+    </div>
+
+    <div style="margin: 15px 4px 20px 4px;">
+      <h2 style="font-size: 1.8rem; font-weight: 700; color: #ffffff; margin: 0;">
+        Marketplace <span style="color: #be2edd">Ecosystem</span>
+      </h2>
+    </div>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ng-container *ngFor="let product of filteredProducts">
+          <ion-col size="12" size-md="6" size-lg="4" *ngIf="product.stock > 0">
+            <ion-card
+              [routerLink]="['/product-details', product.id]"
+              style="--background: #150f22; border-radius: 15px; border: 1px solid rgba(190, 46, 221, 0.2); margin: 12px 8px; overflow: hidden; cursor: pointer; transition: transform 0.2s;"
+            >
+              <div style="height: 200px; position: relative; background: rgba(255,255,255,0.01);">
+                <span style="position: absolute; top: 12px; left: 12px; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; background: rgba(34, 197, 94, 0.15); color: #22c55e; z-index: 2;">IN STOCK ({{product.stock}})</span>
+                <img [src]="product.icon" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              
+              <ion-card-header style="padding: 16px 20px 8px 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="color: #00d2ff; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">{{ product.vendorName || 'Core Node' }}</span>
+                  <ion-button
+                    fill="clear"
+                    (click)="toggleLike(product); $event.stopPropagation()"
+                    style="--color: #ff4757; margin: 0; height: 32px;"
+                  >
+                    <ion-icon [name]="product.isLiked ? 'heart' : 'heart-outline'" style="font-size: 1.2rem;"></ion-icon>
+                    <span style="color: #a0a0a0; margin-left: 4px; font-size: 0.85rem;">{{ product.likes }}</span>
+                  </ion-button>
+                </div>
+                <ion-card-title style="color: #ffffff; font-size: 1.25rem; font-weight: 700; margin: 0;">{{ product.name }}</ion-card-title>
+              </ion-card-header>
+              
+              <ion-card-content style="padding: 0 20px 20px 20px;">
+                <p style="color: #a0a0a0; font-size: 0.9rem; margin: 0 0 16px 0; line-height: 1.4; min-height: 38px;">
+                  {{ product.description }}
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.04); padding-top: 14px;">
+                  <span style="color: #ffffff; font-size: 1.5rem; font-weight: 700;">&euro;{{ product.price }}</span>
+                  <ion-button
+                    (click)="addToCart(product); $event.stopPropagation()"
+                    color="purple"
+                    size="small"
+                    style="--border-radius: 8px; font-weight: 600; height: 36px;"
+                  >
+                    <ion-icon name="bag-add-outline" slot="start"></ion-icon>
+                    Buy Now
+                  </ion-button>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+
+    <div style="margin-top: 40px; margin-left: 4px;">
+      <h3 style="color: #ffffff; font-weight: 700; font-size: 1.4rem; margin: 0;">
+        Archived <span style="color: #ef4444">Depleted Nodes</span>
+      </h3>
+    </div>
+
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ng-container *ngFor="let product of filteredProducts">
+          <ion-col size="12" size-md="6" size-lg="4" *ngIf="product.stock <= 0">
+            <ion-card
+              style="
+                --background: #150f22;
+                border-radius: 15px;
+                border: 1px solid rgba(239, 68, 68, 0.1);
+                margin: 12px 8px;
+                opacity: 0.4;
+                filter: grayscale(100%);
+                pointer-events: none;
+              "
+            >
+              <div style="height: 160px; position: relative;">
+                <span style="position: absolute; top: 12px; left: 12px; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 8px; background: rgba(239, 68, 68, 0.2); color: #ef4444; z-index: 2;">DEPLETED</span>
+                <img [src]="product.icon" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              <ion-card-header style="padding: 16px 20px;">
+                <ion-card-title style="color: #a0a0a0; font-size: 1.1rem; text-decoration: line-through; font-weight: 600;">{{ product.name }}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+    
+  </div>
+</ion-content>

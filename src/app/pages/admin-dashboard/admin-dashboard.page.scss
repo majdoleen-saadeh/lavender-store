@@ -1,0 +1,67 @@
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.catalog-header-text {
+  margin: 20px 4px;
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f8fafc;
+    span {
+      color: var(--cyan-neon);
+    }
+  }
+  p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+  }
+}
+
+.lavender-vendor-card {
+  --background: var(--card-lavender-bg);
+  border: 1px solid rgba(191, 85, 236, 0.1);
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  ion-card-subtitle {
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  ion-card-title {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .stat-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+  }
+}
+
+.lavender-form-card {
+  --background: var(--card-lavender-bg);
+  border: 1px solid rgba(191, 85, 236, 0.15);
+  border-radius: 20px;
+}
+
+.no-requests {
+  background: var(--card-lavender-bg);
+  border: 1px dashed rgba(191, 85, 236, 0.2);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  p {
+    color: #94a3b8;
+    margin: 0;
+  }
+}

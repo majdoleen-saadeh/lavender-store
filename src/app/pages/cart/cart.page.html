@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="purple">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home" color="light">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Your Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg-cart-panel">
+  <div class="cart-heading">
+    <h2>Shopping <span>Basket</span></h2>
+    <p>Review your selected hardware ecosystem below.</p>
+  </div>
+
+  <div class="empty-cart-state" *ngIf="cartItems.length === 0">
+    <span class="empty-icon">🛒</span>
+    <h3>Your cart is empty</h3>
+    <p>Go back to the store and add some smart gadgets!</p>
+    <ion-button
+      routerLink="/home"
+      color="secondary"
+      shape="round"
+      class="ion-margin-top"
+    >
+      Explore Marketplace
+    </ion-button>
+  </div>
+
+  <div *ngIf="cartItems.length > 0">
+    <ion-card class="cart-item-card" *ngFor="let item of cartItems">
+      <div class="item-layout">
+        <div class="item-main-info">
+          <span class="cart-device-icon">{{ item.icon || '⚙️' }}</span>
+          <div class="text-meta">
+            <h4>{{ item.name }}</h4>
+            <p *ngIf="item.vendorName" class="v-tag">{{ item.vendorName }}</p>
+            <span class="unit-price">{{ item.price }} &euro; / unit</span>
+          </div>
+        </div>
+
+        <div class="item-actions">
+          <div class="quantity-controls">
+            <button class="q-btn" (click)="updateQuantity(item, -1)">
+              <ion-icon name="remove-outline"></ion-icon>
+            </button>
+            <span class="q-number">{{ item.quantity }}</span>
+            <button class="q-btn" (click)="updateQuantity(item, 1)">
+              <ion-icon name="add-outline"></ion-icon>
+            </button>
+          </div>
+
+          <button class="trash-btn" (click)="removeItem(item.id)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ion-card>
+
+    <ion-card class="summary-card">
+      <ion-card-content>
+        <div class="summary-row">
+          <span>Items Total:</span>
+          <span class="total-amount">{{ totalPrice }} &euro;</span>
+        </div>
+        <p class="shipping-note">
+          Free immediate node sync & premium secure shipping included.
+        </p>
+
+        <ion-button
+          expand="block"
+          color="success"
+          class="btn-checkout ion-margin-top"
+          (click)="checkout()"
+        >
+          <ion-icon name="card-outline" slot="start"></ion-icon>
+          Proceed to Secure Checkout
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

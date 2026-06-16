@@ -1,0 +1,121 @@
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.catalog-header-text {
+  margin: 20px 4px;
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f8fafc;
+    span {
+      color: var(--lavender-neon);
+    }
+  }
+  p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+  }
+}
+
+// كروت الإحصائيات اللافندرية الموحدة
+.lavender-vendor-card {
+  --background: var(--card-lavender-bg);
+  border: 1px solid rgba(191, 85, 236, 0.1);
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+
+  ion-card-subtitle {
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+  ion-card-title {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .stat-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.8rem;
+    color: var(--lavender-bright);
+    opacity: 0.8;
+  }
+}
+
+// كرت الفورم الزجاجي المتناسق
+.lavender-form-card {
+  --background: var(--card-lavender-bg);
+  border: 1px solid rgba(191, 85, 236, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  margin: 20px 0;
+}
+
+.input-item {
+  margin-bottom: 16px;
+  ion-label {
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+  ion-input,
+  ion-textarea {
+    --background: rgba(11, 7, 19, 0.5) !important;
+    --color: #fff !important;
+    border: 1px solid rgba(191, 85, 236, 0.15);
+    border-radius: 12px;
+    padding: 6px 12px !important;
+  }
+}
+
+.camera-input-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  ion-input {
+    flex-grow: 1;
+  }
+  .cam-btn {
+    --border-radius: 12px;
+    height: 44px;
+    margin: 0;
+  }
+}
+
+.img-preview {
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 150px;
+  border: 1px solid var(--lavender-bright);
+}
+
+.no-requests {
+  background: var(--card-lavender-bg);
+  border: 1px dashed rgba(191, 85, 236, 0.2);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  p {
+    color: #64748b;
+    margin: 0;
+  }
+}
+
+.buy-now-btn-glow {
+  font-weight: 600;
+  --border-radius: 14px;
+  height: 48px;
+  --box-shadow: 0 8px 20px rgba(191, 85, 236, 0.3);
+}

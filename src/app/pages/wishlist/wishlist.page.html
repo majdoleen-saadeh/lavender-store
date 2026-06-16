@@ -1,0 +1,150 @@
+<ion-header [translucent]="true">
+  <ion-toolbar
+    style="
+      --background: #0b0713;
+      border-bottom: 1px solid rgba(190, 46, 221, 0.3);
+    "
+  >
+    <ion-buttons slot="start">
+      <ion-button
+        routerLink="/home"
+        fill="solid"
+        color="purple"
+        style="font-weight: 700; margin-left: 8px; --border-radius: 8px"
+      >
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon> BACK
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="color: #ffffff; font-weight: 600"
+      >Ecosystem Wishlist</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  style="--background: #0b0713; --color: #ffffff"
+  class="ion-padding"
+>
+  <div style="max-width: 1200px; margin: 0 auto">
+    <div style="margin: 15px 0">
+      <h2 style="color: #ffffff; font-weight: 700">
+        Your Pinned <span style="color: #be2edd">Hardware Nodes</span>
+      </h2>
+    </div>
+
+    <div
+      *ngIf="wishlistItems.length === 0"
+      style="
+        text-align: center;
+        padding: 40px;
+        background: #150f22;
+        border: 1px dashed rgba(190, 46, 221, 0.3);
+        border-radius: 15px;
+        margin-top: 20px;
+      "
+    >
+      <ion-icon
+        name="heart-dislike-outline"
+        style="font-size: 4rem; color: #a0a0a0; opacity: 0.6"
+      ></ion-icon>
+      <h4 style="color: #ffffff; margin: 10px 0 5px 0; font-weight: bold">
+        Your Wishlist is Empty
+      </h4>
+      <p style="color: #a0a0a0; font-size: 0.9rem; margin-bottom: 15px">
+        Browse the marketplace to pin items here.
+      </p>
+      <ion-button
+        routerLink="/home"
+        color="purple"
+        size="small"
+        style="--border-radius: 8px"
+        >Explore Marketplace</ion-button
+      >
+    </div>
+
+    <ion-grid class="ion-no-padding" *ngIf="wishlistItems.length > 0">
+      <ion-row>
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="4"
+          *ngFor="let item of wishlistItems"
+        >
+          <ion-card
+            style="
+              --background: #150f22;
+              border-radius: 15px;
+              border: 1px solid rgba(190, 46, 221, 0.2);
+              margin: 10px;
+              position: relative;
+            "
+          >
+            <div
+              style="
+                height: 150px;
+                position: relative;
+                background: rgba(255, 255, 255, 0.01);
+              "
+            >
+              <img
+                [src]="item.icon"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+              <ion-button
+                color="danger"
+                fill="clear"
+                (click)="removeFromWishlist(item.id)"
+                style="
+                  position: absolute;
+                  top: 5px;
+                  right: 5px;
+                  --color: #ef4444;
+                "
+              >
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+
+            <ion-card-header>
+              <span
+                style="
+                  color: #00d2ff;
+                  font-size: 0.7rem;
+                  font-weight: bold;
+                  text-transform: uppercase;
+                "
+                >{{ item.category }}</span
+              >
+              <ion-card-title
+                style="
+                  color: #ffffff;
+                  font-size: 1.1rem;
+                  font-weight: bold;
+                  margin-top: 2px;
+                "
+                >{{ item.name }}</ion-card-title
+              >
+              <h3 style="color: #ffffff; font-weight: bold; margin: 5px 0 0 0">
+                {{ item.price }} &euro;
+              </h3>
+            </ion-card-header>
+
+            <ion-card-content style="padding: 0 15px 15px 15px">
+              <ion-button
+                expand="block"
+                color="purple"
+                size="small"
+                style="--border-radius: 8px"
+                (click)="moveToCart(item)"
+              >
+                <ion-icon name="bag-add-outline" slot="start"></ion-icon> Move
+                to Checkout
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
